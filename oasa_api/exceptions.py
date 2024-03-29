@@ -1,0 +1,2 @@
+class OASAApiException(Exception):
+    pass
