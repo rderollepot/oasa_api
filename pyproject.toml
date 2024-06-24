@@ -24,3 +24,8 @@ keywords = ["API", "data", "public transport", "Athens", "timetables"]
 
 [project.urls]
 Repository = "https://github.com/rderollepot/oasa_api.git"
+
+[tool.pytest.ini_options]
+pythonpath = [
+  "."
+]
