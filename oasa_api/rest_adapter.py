@@ -13,15 +13,15 @@ class RestAdapter:
     This class is responsible for interacting with the OASA REST API. It handles HTTP requests (GET and POST) to the API
     endpoints and processes the responses.
     """
-    def __init__(self, hostname: str, ssl_verify: bool = True, logger: logging.Logger = None):
+    def __init__(self, url: str, ssl_verify: bool = True, logger: logging.Logger = None):
         """
         Initializes the RestAdapter object with the provided parameters.
-        :param hostname: (str): The hostname of the OASA API.
+        :param url: (str): Full path to the OASA API endpoint.
         :param ssl_verify: (bool, optional): Whether to verify SSL certificates. Default is True.
         :param logger: (logging.Logger, optional): Logger instance to use for logging. Default is None.
         """
         self._logger = logger or logging.getLogger(__name__)
-        self.url = f"https://{hostname}/api/"
+        self.url = url
         self._ssl_verify = ssl_verify
         if not ssl_verify:
             # noinspection PyUnresolvedReferences

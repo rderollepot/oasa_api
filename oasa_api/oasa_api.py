@@ -10,14 +10,13 @@ class OASAApi:
     This class serves as a high-level interface for interacting with the OASA API. It encapsulates methods for
     retrieving various information related to public transportation in Athens.
     """
-    def __init__(self, hostname: str = "telematics.oasa.gr", ssl_verify: bool = True, logger: logging.Logger = None):
+    def __init__(self, ssl_verify: bool = True, logger: logging.Logger = None):
         """
         Initializes the OASAApi object with the provided parameters.
-        :param hostname: (str, optional): The hostname of the OASA API. Default is "telematics.oasa.gr".
         :param ssl_verify: (bool, optional): Whether to verify SSL certificates. Default is True.
         :param logger: (logging.Logger, optional): Logger instance to use for logging. Default is None.
         """
-        self._rest_adapter = RestAdapter(hostname, ssl_verify, logger)
+        self._rest_adapter = RestAdapter("https://telematics.oasa.gr/api/", ssl_verify, logger)
 
     def get_master_lines(self) -> DataFrame:
         """
