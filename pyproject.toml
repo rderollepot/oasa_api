@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "oasa_api"
-version = "0.1.0"
+version = "0.1.1"
 description = "This Python package provides a convenient wrapper to interact with the OASA S.A. (Athens Public Transport) API, allowing users to retrieve various information related to the public transport network in Athens, Greece."
 readme = "README.md"
 license = { file="LICENSE" }
