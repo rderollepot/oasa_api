@@ -3,9 +3,15 @@ import requests.packages
 import logging
 from typing import Dict
 from json import JSONDecodeError
+from enum import Enum
 
 from oasa_api.models import Result
 from oasa_api.exceptions import OASAApiException
+
+
+class HttpMethod(Enum):
+    GET = "GET"
+    POST = "POST"
 
 
 class RestAdapter:
@@ -27,20 +33,20 @@ class RestAdapter:
             # noinspection PyUnresolvedReferences
             requests.packages.urllib3.disable_warnings()
 
-    def _do(self, http_method: str, params: Dict = None, data: Dict = None) -> Result:
+    def _do(self, http_method: HttpMethod, params: Dict = None, data: Dict = None) -> Result:
         """
         Performs an HTTP request using the specified method, parameters, and data.
-        :param http_method: (str): The HTTP method (GET or POST) for the request.
+        :param http_method: (HttpMethod): The HTTP method (GET or POST) for the request.
         :param params: (Dict, optional): Parameters to include in the request URL. Default is None.
         :param data: (Dict, optional): Data to include in the request body for POST requests. Default is None.
         :return: An instance of the Result class containing the response data.
         """
-        log_line_pre = f"method={http_method}, url={self.url}, params={params}"
+        log_line_pre = f"method={http_method.value}, url={self.url}, params={params}"
         log_line_post = "success={}, status_code={}, message={}"
         # Log HTTP params and perform an HTTP request, catching and re-raising any exceptions
         try:
             self._logger.debug(msg=log_line_pre)
-            response = requests.request(method=http_method, url=self.url, verify=self._ssl_verify,
+            response = requests.request(method=http_method.value, url=self.url, verify=self._ssl_verify,
                                         params=params, json=data)
         except requests.exceptions.RequestException as e:
             self._logger.error(msg=(str(e)))
@@ -66,7 +72,7 @@ class RestAdapter:
         :param params: (Dict, optional): Parameters to include in the GET request URL. Default is None.
         :return: An instance of the Result class containing the response data.
         """
-        return self._do(http_method='GET', params=params)
+        return self._do(http_method=HttpMethod.GET, params=params)
 
     def post(self, params: Dict = None, data: Dict = None) -> Result:
         """
@@ -75,4 +81,4 @@ class RestAdapter:
         :param data: (Dict, optional): Data to include in the POST request body. Default is None.
         :return: An instance of the Result class containing the response data.
         """
-        return self._do(http_method='POST', params=params, data=data)
+        return self._do(http_method=HttpMethod.POST, params=params, data=data)
