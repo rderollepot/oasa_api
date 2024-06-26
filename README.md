@@ -34,8 +34,6 @@ lines_with_master_line_info = oasa_api.get_lines_with_master_line_info()
 print(lines_with_master_line_info)
 ```
 
-For more detailed usage examples, please refer to the [demo notebook](./demo.ipynb).
-
 ## Available Methods
 
 - `get_master_lines()`

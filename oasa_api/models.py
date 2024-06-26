@@ -24,8 +24,8 @@ class Result:
     def parse_data(self) -> Union[Dict[str, DataFrame], DataFrame]:
         """
         Parses the response data into Pandas DataFrame(s).
-        :return: (Union[Dict[str, pandas.DataFrame], pandas.DataFrame]): Parsed data as a Pandas DataFrame or dictionary of
-        DataFrames.
+        :return: (Union[Dict[str, pandas.DataFrame], pandas.DataFrame]): Parsed data as a Pandas DataFrame or dictionary
+        of DataFrames.
         """
         if isinstance(self.data, List):
             return json_normalize(self.data)
